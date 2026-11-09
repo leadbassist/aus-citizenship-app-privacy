@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get the Australian Citizenship Test app</title>
+<meta name="description" content="Practice questions and a timed Mock Test for the Australian citizenship test.">
+<meta property="og:title" content="Australian Citizenship Test app">
+<meta property="og:description" content="Practice questions and a timed Mock Test for the Australian citizenship test.">
+<style>
+  :root { --bg:#f6f8f6; --card:#fff; --text:#14221a; --muted:#51615a; --line:#dde5df; --green:#00843d; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0e1411; --card:#161e19; --text:#e8f0ea; --muted:#9fb0a6; --line:#26332b; --green:#3fbf7a; } }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; padding:20px; }
+  .card { max-width:420px; width:100%; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:28px 24px; text-align:center; }
+  h1 { margin:0 0 8px; font-size:1.4rem; } p { margin:0 0 18px; color:var(--muted); }
+  a.btn { display:block; margin:10px 0; padding:14px 16px; border-radius:12px; background:var(--green); color:#fff; text-decoration:none; font-weight:700; }
+  a.btn.off { background:transparent; color:var(--muted); border:1.5px dashed var(--line); pointer-events:none; font-weight:600; }
+  small { display:block; margin-top:16px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Australian Citizenship Test</h1>
+  <p id="msg">Practice questions based on the official booklet, plus a timed Mock Test.</p>
+  <a class="btn" id="android" href="#">Get it on Google Play</a>
+  <a class="btn" id="ios" href="#">Download on the App Store</a>
+  <small>Independent study aid. Not affiliated with the Australian Government.</small>
+</div>
+<script>
+  // One link for everyone: phones are sent to their own store automatically.
+  // Owner: fill in APP_STORE_ID once the App Store record exists (the number in the App Store URL).
+  var PACKAGE = "com.leadbassist.auscitizenshipapp";
+  var APP_STORE_ID = "";
+  var play = "https://play.google.com/store/apps/details?id=" + PACKAGE;
+  var apple = APP_STORE_ID ? "https://apps.apple.com/app/id" + APP_STORE_ID : "";
+
+  var a = document.getElementById("android"), i = document.getElementById("ios");
+  a.href = play;
+  if (apple) { i.href = apple; } else { i.className = "btn off"; i.textContent = "App Store: coming soon"; }
+
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  var isApple = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  if (isAndroid) { document.getElementById("msg").textContent = "Opening Google Play…"; location.replace(play); }
+  else if (isApple && apple) { document.getElementById("msg").textContent = "Opening the App Store…"; location.replace(apple); }
+</script>
+</body>
+</html>
